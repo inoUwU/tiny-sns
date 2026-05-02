@@ -71,6 +71,7 @@ Table user_profiles {
   website varchar
   avatar_media_id uuid [ref: > media.id]
   header_media_id uuid [ref: > media.id]
+  pinned_post_id uuid [ref: > posts.id, note: "optional pinned post shown at the top of profile"]
   birth_date date
   updated_at timestamptz [not null, default: `now()`]
 }

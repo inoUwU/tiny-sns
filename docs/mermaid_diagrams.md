@@ -142,6 +142,7 @@ flowchart LR
 
 - まず `users` を起点に `posts`、`follows`、`notifications` を追うと主要ユースケースが見えます
 - `post_media`、`post_hashtags`、`mentions` は、中核テーブルを補助する中間テーブルです
+- `user_profiles.pinned_post_id` により、プロフィール先頭に表示する固定ツイートも表現できます
 - 認証用テーブルや通報テーブルはこの図からは省き、コアSNS動作に集中しています
 
 ```mermaid
@@ -161,6 +162,7 @@ erDiagram
         varchar website
         uuid avatar_media_id FK
         uuid header_media_id FK
+        uuid pinned_post_id FK
     }
     POSTS {
         uuid id PK
@@ -229,6 +231,7 @@ erDiagram
     }
 
     USERS ||--|| USER_PROFILES : has
+    USER_PROFILES o|--o| POSTS : pins
     USERS ||--o{ POSTS : authors
     USERS ||--o{ MEDIA : owns
     POSTS ||--o{ POST_MEDIA : contains
@@ -272,12 +275,13 @@ erDiagram
 ```mermaid
 flowchart TD
     gap1[非公開アカウント設定がない] --> fix1[users.is_private を追加]
-    gap2[ログインセッションが保存できない] --> fix2[auth_sessions を追加]
-    gap3[メール認証が保存できない] --> fix3[email_verification_tokens を追加]
-    gap4[パスワード再設定が保存できない] --> fix4[password_reset_tokens を追加]
-    gap5[通報の受付先がない] --> fix5[reports を追加]
-    gap6[タイムライン向け索引が弱い] --> fix6[posts/follows/notifications に索引追加]
-    gap7[メディア順序と状態が弱い] --> fix7[post_media 一意制約と media.processing_status を追加]
+    gap2[固定ツイートの保持先がない] --> fix2[user_profiles.pinned_post_id を追加]
+    gap3[ログインセッションが保存できない] --> fix3[auth_sessions を追加]
+    gap4[メール認証が保存できない] --> fix4[email_verification_tokens を追加]
+    gap5[パスワード再設定が保存できない] --> fix5[password_reset_tokens を追加]
+    gap6[通報の受付先がない] --> fix6[reports を追加]
+    gap7[タイムライン向け索引が弱い] --> fix7[posts/follows/notifications に索引追加]
+    gap8[メディア順序と状態が弱い] --> fix8[post_media 一意制約と media.processing_status を追加]
 ```
 
 補足:

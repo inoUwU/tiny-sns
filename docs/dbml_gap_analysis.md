@@ -9,6 +9,7 @@
 | 不足項目 | 影響 | 今回の反映 |
 | --- | --- | --- |
 | 非公開アカウント設定がない | `follows.status=pending` の意味が確定しない | `users.is_private` を追加 |
+| 固定ツイートの保持先がない | プロフィール先頭に固定投稿を表示する仕様を保持できない | `user_profiles.pinned_post_id` を追加 |
 | ログインセッションの保存先がない | ログアウト、複数端末、失効管理ができない | `auth_sessions` を追加 |
 | メール確認状態がない | 新規登録後の本人確認を表現できない | `users.email_verified_at` と `email_verification_tokens` を追加 |
 | パスワード再設定の保存先がない | パスワード紛失時の復旧導線が持てない | `password_reset_tokens` を追加 |
@@ -34,6 +35,7 @@
 ## 5. 移行時の注意
 
 - 既存ユーザーは `is_private=false` を初期値としてバックフィルする
+- `pinned_post_id` は既存プロフィールでは `null` 開始とする
 - `email_verified_at` は既存ユーザーでは `null` 開始とし、検証ポリシーを別途定義する
 - `auth_sessions` とトークンテーブルは平文ではなくハッシュ化済みトークンを保存する
 - `reports` は `target_user_id` または `target_post_id` のどちらか一方を必須とする制約をアプリケーション側で担保する
