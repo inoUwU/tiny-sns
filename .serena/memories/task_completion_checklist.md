@@ -1,0 +1,4 @@
+- If backend code changes, validate from backend/ with cargo build, cargo test, or cargo run as appropriate.
+- If docs change, ensure the edited markdown/dbml files have no reported errors.
+- Do not edit generated artifacts under backend/target/.
+- Prefer minimal focused changes and preserve current documentation-first structure.

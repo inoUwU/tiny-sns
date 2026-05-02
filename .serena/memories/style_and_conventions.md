@@ -1,0 +1,5 @@
+- Keep shared Mermaid diagrams in docs/mermaid_diagrams.md; do not add standalone .mmd files unless explicitly requested.
+- Keep schema changes in docs/sns.dbml and explain gaps in docs/dbml_gap_analysis.md when needed.
+- If behavior or data shape changes, update the relevant docs alongside code or call out the mismatch.
+- Treat design.pen as a .pen design artifact and edit it only with .pen-aware tools.
+- Backend changes should respect documented domain rules from Considerations/pull_push_timeline.md and docs/specification.md.

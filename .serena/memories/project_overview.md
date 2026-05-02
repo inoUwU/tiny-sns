@@ -1,0 +1,5 @@
+- Purpose: design-first Twitter-like SNS study project.
+- Source of truth lives in docs/specification.md, docs/sns.dbml, docs/mermaid_diagrams.md, and Considerations/pull_push_timeline.md.
+- Current backend code is minimal; backend/src/main.rs is only a stub.
+- Main active areas are documentation, schema design, and design.pen UI prototypes.
+- Pinned posts are profile-level via user_profiles.pinned_post_id, not timeline ordering.

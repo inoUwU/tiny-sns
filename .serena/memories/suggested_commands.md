@@ -1,0 +1,6 @@
+- Enter backend crate: cd backend
+- Build: cargo build
+- Test: cargo test
+- Run app: cargo run
+- On macOS use standard shell utilities like ls, cd, find, rg, git.
+- Do not run Rust commands from repository root because there is no workspace-level Cargo project.
